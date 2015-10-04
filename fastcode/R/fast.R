@@ -1,12 +1,3 @@
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(
-    w=sample(1:4000, size = n, replace = TRUE),
-    v=runif(n = n, 0, 10000)
-  )
-
-
 knapsack_brute_force <- function(x, W){
   stopifnot(names(x) == c("w","v")&& is.data.frame(x))
   n <- nrow(x)
@@ -24,5 +15,3 @@ knapsack_brute_force <- function(x, W){
   ele <- elem[[which(kna == sum_wv$v)]][[1]]
   return(list(value = kna, elements = ele))
 }
-
-knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500)
