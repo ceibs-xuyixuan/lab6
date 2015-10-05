@@ -1,10 +1,3 @@
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(
-    w=sample(1:4000, size = n, replace = TRUE),
-    v=runif(n = n, 0, 10000)
-  )
 knasack_dynamic<-function(x, W){
   stopifnot(names(x) == c("w","v")&& is.data.frame(x))
   A <- matrix(rep(0,(W + 1)*(nrow(x)+1)),ncol = (W+1))
@@ -33,4 +26,3 @@ knasack_dynamic<-function(x, W){
   }
   return(list(value = A[j+1, Y+1], elements = sort(element,decreasing = FALSE)))
 }
-knasack_dynamic(x = knapsack_objects[1:12,], W = 3500)
