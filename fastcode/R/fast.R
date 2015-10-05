@@ -7,7 +7,6 @@ knapsack_brute_force <- function(x, W, parallel = FALSE){
       elem <- NULL
       ele <- NULL
       kna <- NULL
-      
       if(parallel == FALSE){
             for(i in 1 : (2^n-1)){
                   sum_wv$w[i] <- sum(x$w[(which(a[,i] == 1))])  #sum(w)
