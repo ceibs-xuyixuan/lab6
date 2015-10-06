@@ -25,4 +25,8 @@ knasack_dynamic<-function(x, W){
     }
   }
   return(list(value = A[j+1, Y+1], elements = sort(element,decreasing = FALSE)))
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5eb0f9834c93472a7b6491630c0e33dc633c1834
