@@ -1,0 +1,76 @@
+---
+title: "Writing fast R code"
+author: "Violeta Garcia Saez & Yixuan Xu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The package will contain three di↵erent functions for solving what is called the knapsack problem.
+The knapsack problem is a discrete optimization problem where we have a knapsack that can take a
+limited weight W and we want to fill this knapsack with a number of items i = 1, ..., n, each with a
+weight w i and a value v i . The goal is to find the knapsack with the largest value of the elements added
+to the knapsack. To solve this problem is NP which means that (most researchers belive) there are no
+polynomial time algorithm to solve this problem.
+
+
+## Report
+
+this is Brute force search to solve the knapsack problem.
+
+```{r}
+library("fastcode")
+library("parallel")
+set.seed(42)
+n <- 2000
+knapsack_objects <-
+data.frame(
+w=sample(1:4000, size = n, replace = TRUE),
+v=runif(n = n, 0, 10000)
+)
+knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500)
+system.time(knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500))
+```
+  
+this is Brute force search with multicore to solve the knapsack problem.
+
+```{r}
+knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500, parallel = TRUE)
+system.time(knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500, parallel = TRUE))
+```
+  
+This time we use Dynamic programming to solve the knapsack problem.
+
+```{r}
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+system.time(knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
+```
+  
+A last approach is to use the a heuristic or approximation for the problem.
+  
+```{r}
+greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+system.time(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
+```
+  
+now we will look at how long time does it takes to run the algorithm for n = 500 objects?  
+
+```{r}
+system.time(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```
+
+And now How long time does it takes to run the algorithm for n = 10000 objects?
+
+```{r}
+set.seed(42)
+n <- 2000
+knapsack_objects1 <-
+data.frame(
+w=sample(1:4000, size = n, replace = TRUE),
+v=runif(n = n, 0, 10000)
+)
+system.time(greedy_knapsack(x = knapsack_objects1[1:1000,], W = 3500))
+```

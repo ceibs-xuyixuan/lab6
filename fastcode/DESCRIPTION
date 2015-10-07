@@ -1,17 +1,20 @@
 Package: fastcode
 Type: Package
-Title: make fast
+Title: make fast code
 Version: 1.0
 Date: 2015-09-30
 Author: Violeta and Yixuan
 Maintainer: yixuan<yixxu916@student.liu.se>
-Description: Access the data in the API.
+Description: try different way to make the code fast.
 License: GPL-2 | GPL-3
+Depends: R (>= 3.1.0)
 Suggests: 
     knitr,
     devtools,
     roxygen2,
     testthat,
     rmarkdown
+Imports:
+    parallel
 VignetteBuilder: knitr
 LazyData: true
